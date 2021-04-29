@@ -3,16 +3,18 @@
 void Controller::firstTask(/*char** argv*/) {
 	readTree(/*argv[1]*/);
 	//checkAVL
-	//m_tree.printTree(m_tree.m_root);
+	// m_tree.printTree(m_tree.m_root);
+	printAvl();
 	printStatistics();
 }
 
 void Controller::secondTask(char** argv) {
 	readTree(/*argv[1]*/);
+	printKeySearch(200);
 }
 
 void Controller::readTree(/*std::string filename*/) {
-	int tmp[10] = { 2, 200, -312, 234, 1, 33, 4, 45, -10, 0 };
+	int tmp[10] = { 5, 3, 17, 9, 23, 54, 11, 79, 30, 12 };
 	for(int i = 0; i < 10; ++i) {
 		m_tree.addNode(tmp[i], m_tree.m_root);
 	}
@@ -30,8 +32,41 @@ void Controller::readTree(/*std::string filename*/) {
 	}*/
 }
 
+void Controller::printAvl() {
+	bool isAvl = true;
+	m_tree.getAvl(m_tree.m_root, isAvl);
+	if (isAvl) {
+		std::cout << "AVL: YES" << std::endl;
+	}
+	else {
+		std::cout << "AVL: NO" << std::endl;
+	}
+}
+
 void Controller::printStatistics() {
 	std::cout << "min: " << m_tree.getMinimum(m_tree.m_root) << ", ";
 	std::cout << "max: " << m_tree.getMaximum(m_tree.m_root) << ", ";
 	std::cout << "avg: " << m_tree.getAverage(m_tree.m_root) << std::endl;
 }
+
+void Controller::printKeySearch(int key) {
+	std::cout << "Search key " << std::endl;
+	std::vector<int> searchList;
+	m_tree.searchKey(m_tree.m_root, searchList, key);
+
+	if (searchList.empty()) {
+		std::cout << key << " not found!" << std::endl;
+	}
+	else {
+		std::cout << key << " found ";
+		for (int i = 0; i < searchList.size(); i++) {
+			if (i == 0)
+				std::cout << searchList[i];
+			else
+				std::cout << ", " << searchList[i];
+		}	
+		std::cout << std::endl;
+	}
+	
+}
+
