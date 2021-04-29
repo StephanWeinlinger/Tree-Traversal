@@ -20,6 +20,7 @@ public:
 	int getMaximum(pnode root);
 	double getAverage(pnode root);
 	void printTree(pnode root);
+	int getAvl(pnode root, bool &isAvl);
 private:
 	void deleteTree(pnode root);
 	pnode createNode(int value);

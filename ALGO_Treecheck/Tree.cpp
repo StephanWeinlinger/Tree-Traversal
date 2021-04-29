@@ -99,3 +99,24 @@ void Tree::printTree(pnode root) {
 		printTree(root->right);
 	}
 }
+
+ int Tree::getAvl(pnode root, bool &isAvl) {
+	 {
+		 if (root == nullptr)
+			 return 0;
+
+		 int left = getAvl(root->left, isAvl);
+		 int right = getAvl(root->right, isAvl);
+
+		 int balance = right - left;
+		 std::string avlViolation = "";
+		 if (balance == 2) {
+			avlViolation = " (AVL violation!)";
+			isAvl = false;
+		 }
+		 std::cout << "bal(" << root->value << ") = " << balance << avlViolation << std::endl;
+		 return 1 + std::max(left, right);
+	 }
+
+	 
+}

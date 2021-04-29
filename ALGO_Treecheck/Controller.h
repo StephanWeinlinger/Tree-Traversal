@@ -13,4 +13,6 @@ private:
 	Tree m_tree;
 	void readTree(/*std::string filename*/);
 	void printStatistics();
+	void printAvl();
+	void searchKey();
 };
