@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 typedef struct node {
 	int value;
@@ -21,9 +22,11 @@ public:
 	double getAverage(pnode root);
 	void printTree(pnode root);
 	int getAvl(pnode root, bool &isAvl);
+	void searchKey(pnode root, std::vector<int>& searchList, int key);
 private:
 	void deleteTree(pnode root);
 	pnode createNode(int value);
 	int countNodes(pnode root);
 	int sumNodes(pnode root);
+	
 };

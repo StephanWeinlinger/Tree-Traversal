@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include "Tree.h"
 
 class Controller {
@@ -14,5 +15,5 @@ private:
 	void readTree(/*std::string filename*/);
 	void printStatistics();
 	void printAvl();
-	void searchKey();
+	void printKeySearch(int key);
 };
