@@ -3,7 +3,7 @@
 
 int main(/*int arc, char** argv*/) {
 	Controller controller;
-	controller.firstTask();
+	controller.secondTask();
 	/*switch(arc) {
 		case 2:
 			controller.firstTask(argv);

@@ -8,9 +8,9 @@ void Controller::firstTask(/*char** argv*/) {
 	printStatistics();
 }
 
-void Controller::secondTask(char** argv) {
+void Controller::secondTask(/*char** argv*/) {
 	readTree(/*argv[1]*/);
-	printKeySearch(200);
+	printKeySearch(3);
 }
 
 void Controller::readTree(/*std::string filename*/) {
