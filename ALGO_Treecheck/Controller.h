@@ -12,8 +12,10 @@ public:
 	void secondTask(char **argv);
 private:
 	Tree m_tree;
-	void readTree(/*std::string filename*/);
+	Tree sub_tree;
+	void readTree(/*std::string filename*/ Tree &tree);
 	void printStatistics();
 	void printAvl();
 	void printKeySearch(int key);
+	void printSubTreeSearch(std::vector<int>& subTree);
 };

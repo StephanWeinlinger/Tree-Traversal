@@ -121,11 +121,11 @@ void Tree::printTree(pnode root) {
 	 
 }
 
-void Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
+pnode Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
  {
 	if (root == nullptr) {
 		searchList.clear();
-		return;
+		return nullptr;
 	}
 	if (root->value > key) {
 		 searchList.push_back(root->value);
@@ -137,10 +137,10 @@ void Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
 	}
 	else if (root->value == key) {
 		 searchList.push_back(root->value);
-		 return;
+		 return root;
 	}
 	else {
 		 searchList.clear();
-		 return;
+		 return nullptr;
 	}
  }
