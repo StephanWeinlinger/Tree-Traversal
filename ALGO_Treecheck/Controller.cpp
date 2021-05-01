@@ -7,10 +7,12 @@ void Controller::firstTask(/*char** argv*/) {
 	printAvl();
 	printStatistics();
 	printKeySearch(30);
+	readTree(/*argv[1]*/this->sub_tree);
+	//printSubTreeSearch();
 }
 
 void Controller::secondTask(char** argv) {
-	readTree(/*argv[1]*/this->sub_tree);
+	
 	
 }
 
@@ -72,22 +74,13 @@ void Controller::printKeySearch(int key) {
 }
 
 /*
-void Controller::printSubTreeSearch(std::vector<int> &subTree) {
+void Controller::printSubTreeSearch() {
 	std::cout << "Search SubTree " << std::endl;
-	std::vector<int> searchList;
-	m_tree.searchKey(m_tree.m_root, searchList, key);
-
-	if (searchList.empty()) {
-		std::cout << key << " not found!" << std::endl;
+	pnode searchedKey = m_tree.searchKeyWithoutList(m_tree.m_root, sub_tree.m_root->value);
+	if (searchedKey == nullptr) {
+		std::cout << "First Node not found" << std::endl;
 	}
 	else {
-		std::cout << key << " found ";
-		for (int i = 0; i < searchList.size(); i++) {
-			if (i == 0)
-				std::cout << searchList[i];
-			else
-				std::cout << ", " << searchList[i];
-		}
-		std::cout << std::endl;
+		m_tree.searchSubTree(searchedKey, this->sub_tree.m_root);
 	}
-}*/
+} */

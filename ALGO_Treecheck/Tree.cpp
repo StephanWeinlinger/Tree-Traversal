@@ -144,3 +144,36 @@ pnode Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
 		 return nullptr;
 	}
  }
+
+pnode Tree::searchKeyWithoutList(pnode root, int key)
+{
+	if (root == nullptr) {
+		return nullptr;
+	}
+	if (root->value > key) {
+		searchKeyWithoutList(root->left, key);
+	}
+	else if (root->value < key) {
+		searchKeyWithoutList(root->right, key);
+	}
+	else if (root->value == key) {
+		return root;
+	}
+	else {
+		return nullptr;
+	}
+}
+
+/*
+pnode Tree::searchSubTree(pnode m_root, pnode sub_root) {
+
+	if (m_root == nullptr || sub_root == nullptr) {
+		return nullptr;
+	}
+
+	if (m_root->value == sub_root->value) {
+		searchSubTree(m_root->left, sub_root->left);
+		searchSubTree(m_root->right, sub_root->right);
+	}
+	searchSubTree(searchKeyWithoutList(m_root, sub_root->value), sub_root);
+} */

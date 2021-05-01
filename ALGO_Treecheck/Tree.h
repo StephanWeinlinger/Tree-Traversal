@@ -23,10 +23,13 @@ public:
 	void printTree(pnode root);
 	int getAvl(pnode root, bool &isAvl);
 	pnode searchKey(pnode root, std::vector<int>& searchList, int key);
+	pnode searchKeyWithoutList(pnode root, int key);
+	pnode searchSubTree(pnode m_root, pnode sub_root);
 private:
 	void deleteTree(pnode root);
 	pnode createNode(int value);
 	int countNodes(pnode root);
 	int sumNodes(pnode root);
+	
 	
 };

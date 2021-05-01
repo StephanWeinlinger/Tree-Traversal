@@ -17,5 +17,5 @@ private:
 	void printStatistics();
 	void printAvl();
 	void printKeySearch(int key);
-	void printSubTreeSearch(std::vector<int>& subTree);
+	void printSubTreeSearch();
 };
