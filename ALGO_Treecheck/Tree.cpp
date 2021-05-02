@@ -75,19 +75,6 @@ int Tree::countNodes(pnode root) {
 	return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
-void Tree::printTree(pnode root) {
-	if(root == nullptr) {
-		return;
-	}
-	if(root->left != nullptr) {
-		printTree(root->left);
-	}
-	std::cout << root->value << std::endl;
-	if(root->right != nullptr) {
-		printTree(root->right);
-	}
-}
-
  int Tree::getAvl(pnode root, bool &isAvl) {
 	 {
 		 if (root == nullptr)

@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Controller.h"
 
-int main(/*int arc, char** argv*/) {
+int main(int arc, char** argv) {
 	Controller controller;
-	controller.firstTask();
-	/*switch(arc) {
+	controller.secondTask(argv);
+	switch(arc) {
 		case 2:
 			controller.firstTask(argv);
 			break;
@@ -13,6 +13,6 @@ int main(/*int arc, char** argv*/) {
 			break;
 		default:
 			std::cout << "Wrong parameter amount!" << std::endl;
-	}*/
+	}
 	return 0;
 }

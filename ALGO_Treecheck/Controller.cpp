@@ -1,6 +1,35 @@
 #include "Controller.h"
 
-void Controller::firstTask(/*char** argv*/) {
+void Controller::firstTask(char** argv) {
+	printLogo();
+	readTree(argv[1], m_tree);
+	if(m_tree.m_root != nullptr) {
+		printAvl();
+		printStatistics();
+	}
+	else {
+		std::cout << "File is empty!" << std::endl;
+	}
+}
+
+void Controller::secondTask(char** argv) {
+	printLogo();
+	readTree(argv[1], m_tree);
+	readTree(argv[2], sub_tree);
+	if(m_tree.m_root != nullptr && sub_tree.m_root != nullptr) {
+		if(this->sub_tree.m_root->left == nullptr && this->sub_tree.m_root->right == nullptr) {
+			printKeySearch();
+		}
+		else {
+			printSubTreeSearch();
+		}
+	}
+	else {
+		std::cout << "At least one file is empty!" << std::endl;
+	}
+}
+
+void Controller::printLogo() {
 	std::cout << "\n"
 		"  _____                 ____ _               _    \n"
 		" |_   _| __ ___  ___   / ___| |__   ___  ___| | __\n"
@@ -8,46 +37,20 @@ void Controller::firstTask(/*char** argv*/) {
 		"   | || | |  __/  __/ | |___| | | |  __/ (__|   < \n"
 		"   |_||_|  \\___|\\___|  \\____|_| |_|\\___|\\___|_|\\_\\\n"
 		"                                                  " << std::endl << std::endl;
-	readTree(/*argv[1]*/this->m_tree);
-	//checkAVL
-	// m_tree.printTree(m_tree.m_root);
-	//printAvl();
-	printStatistics();
-
-	// SECOND TASK
-	tempReadSubTree(this->sub_tree);
-
-	if (this->sub_tree.m_root->left == nullptr && this->sub_tree.m_root->right == nullptr) {
-		printKeySearch();
-	}
-	else {
-		printSubTreeSearch();
-	}
-	
 }
 
-void Controller::secondTask(char** argv) {
-	
-	
-}
-
-void Controller::readTree(/*std::string filename*/ Tree &tree) {
-	int tmp[10] = { 5, 3, 17, 9, 23, 54, 11, 79, 30, 12 };
-	for(int i = 0; i < 10; ++i) {
-		tree.addNode(tmp[i], tree.m_root);
-	}
-	/*
+void Controller::readTree(std::string filename, Tree& tree) {
 	std::string line;
 	std::ifstream source(filename);
 	if(source.is_open()) {
 		while(getline(source, line)) {
-			m_tree.addNode(std::stoi(line), m_tree.m_root);
+			tree.addNode(std::stoi(line), tree.m_root);
 		}
 		source.close();
 	}
 	else {
 		std::cout << "File is opened or not existent!" << std::endl;
-	} */
+	}
 }
 
 void Controller::tempReadSubTree(Tree& tree) {
@@ -59,7 +62,7 @@ void Controller::tempReadSubTree(Tree& tree) {
 
 void Controller::printAvl() {
 	bool isAvl = true;
-	std::cout << "Calcualte balance:" << std::endl;
+	std::cout << "Calculate balance:" << std::endl;
 	m_tree.getAvl(m_tree.m_root, isAvl);
 	std::cout << std::endl << "AVL: " << std::endl;
 	if (isAvl) {
@@ -96,7 +99,7 @@ void Controller::printKeySearch() {
 	}
 	else {
 		std::cout << " -> " << searchedKey->value << " found ";
-		for (int i = 0; i < searchList.size(); i++) {
+		for (unsigned int i = 0; i < searchList.size(); i++) {
 			if (i == 0)
 				std::cout << searchList[i];
 			else

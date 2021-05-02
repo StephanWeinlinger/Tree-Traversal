@@ -20,7 +20,6 @@ public:
 	int getMinimum(pnode root);
 	int getMaximum(pnode root);
 	double getAverage(pnode root);
-	void printTree(pnode root);
 	int getAvl(pnode root, bool &isAvl);
 	pnode searchKey(pnode root, std::vector<int>& searchList, int key);
 	pnode searchKeyWithoutList(pnode root, int key);
