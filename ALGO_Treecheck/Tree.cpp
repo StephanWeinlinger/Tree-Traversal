@@ -110,15 +110,13 @@ void Tree::printTree(pnode root) {
 
 		 int balance = right - left;
 		 std::string avlViolation = "";
-		 if (balance == 2) {
+		 if (balance <= -2 || balance >= 2) {
 			avlViolation = " (AVL violation!)";
 			isAvl = false;
 		 }
 		 std::cout << " -> bal(" << root->value << ") = " << balance << avlViolation << std::endl;
 		 return 1 + std::max(left, right);
 	 }
-
-	 
 }
 
 pnode Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
@@ -170,10 +168,6 @@ int Tree::searchSubTree(pnode m_root, pnode sub_root, bool &error) {
 	}
 
 	if (sub_root->left == nullptr && sub_root->right == nullptr) {
-		pnode searchedNode = searchKeyWithoutList(m_root, sub_root->value);
-		if (searchedNode == nullptr) {
-			error = true;
-		}
 		return 1;
 	}
 
