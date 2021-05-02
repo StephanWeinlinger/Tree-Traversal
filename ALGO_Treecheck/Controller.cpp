@@ -1,22 +1,25 @@
 #include "Controller.h"
 
 void Controller::firstTask(/*char** argv*/) {
-	readTree(/*argv[1]*/);
+	readTree(/*argv[1]*/this->m_tree);
 	//checkAVL
 	// m_tree.printTree(m_tree.m_root);
-	printAvl();
+	//printAvl();
 	printStatistics();
+	//printKeySearch(30);
+	//readTree(/*argv[1]*/this->sub_tree);
+	//printSubTreeSearch();
 }
 
 void Controller::secondTask(/*char** argv*/) {
-	readTree(/*argv[1]*/);
-	printKeySearch(3);
+	
+	
 }
 
-void Controller::readTree(/*std::string filename*/) {
+void Controller::readTree(/*std::string filename*/ Tree &tree) {
 	int tmp[10] = { 5, 3, 17, 9, 23, 54, 11, 79, 30, 12 };
 	for(int i = 0; i < 10; ++i) {
-		m_tree.addNode(tmp[i], m_tree.m_root);
+		tree.addNode(tmp[i], tree.m_root);
 	}
 	
 	/*std::string line;
@@ -52,13 +55,13 @@ void Controller::printStatistics() {
 void Controller::printKeySearch(int key) {
 	std::cout << "Search key " << std::endl;
 	std::vector<int> searchList;
-	m_tree.searchKey(m_tree.m_root, searchList, key);
+	pnode searchedKey = m_tree.searchKey(m_tree.m_root, searchList, key);
 
 	if (searchList.empty()) {
 		std::cout << key << " not found!" << std::endl;
 	}
 	else {
-		std::cout << key << " found ";
+		std::cout << searchedKey->value << " found ";
 		for (int i = 0; i < searchList.size(); i++) {
 			if (i == 0)
 				std::cout << searchList[i];
@@ -70,3 +73,14 @@ void Controller::printKeySearch(int key) {
 	
 }
 
+/*
+void Controller::printSubTreeSearch() {
+	std::cout << "Search SubTree " << std::endl;
+	pnode searchedKey = m_tree.searchKeyWithoutList(m_tree.m_root, sub_tree.m_root->value);
+	if (searchedKey == nullptr) {
+		std::cout << "First Node not found" << std::endl;
+	}
+	else {
+		m_tree.searchSubTree(searchedKey, this->sub_tree.m_root);
+	}
+} */

@@ -62,27 +62,15 @@ double Tree::getAverage(pnode root) {
 }
 
 int Tree::sumNodes(pnode root) {
-	if(root->left == nullptr && root->right == nullptr) {
-		return root->value;
-	}
-	else if(root->left == nullptr) {
-		return root->value + sumNodes(root->right);
-	}
-	else if(root->right == nullptr) {
-		return root->value + sumNodes(root->left);
+	if(root == nullptr) {
+		return 0;
 	}
 	return root->value + sumNodes(root->left) + sumNodes(root->right);
 }
 
 int Tree::countNodes(pnode root) {
-	if(root->left == nullptr && root->right == nullptr) {
-		return 1;
-	}
-	else if(root->left == nullptr) {
-		return 1 + countNodes(root->right);
-	}
-	else if(root->right == nullptr) {
-		return 1 + countNodes(root->left);
+	if(root == nullptr) {
+		return 0;
 	}
 	return 1 + countNodes(root->left) + countNodes(root->right);
 }
@@ -121,11 +109,11 @@ void Tree::printTree(pnode root) {
 	 
 }
 
-void Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
+pnode Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
  {
 	if (root == nullptr) {
 		searchList.clear();
-		return;
+		return nullptr;
 	}
 	if (root->value > key) {
 		 searchList.push_back(root->value);
@@ -137,10 +125,43 @@ void Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
 	}
 	else if (root->value == key) {
 		 searchList.push_back(root->value);
-		 return;
+		 return root;
 	}
 	else {
 		 searchList.clear();
-		 return;
+		 return nullptr;
 	}
  }
+
+pnode Tree::searchKeyWithoutList(pnode root, int key)
+{
+	if (root == nullptr) {
+		return nullptr;
+	}
+	if (root->value > key) {
+		searchKeyWithoutList(root->left, key);
+	}
+	else if (root->value < key) {
+		searchKeyWithoutList(root->right, key);
+	}
+	else if (root->value == key) {
+		return root;
+	}
+	else {
+		return nullptr;
+	}
+}
+
+/*
+pnode Tree::searchSubTree(pnode m_root, pnode sub_root) {
+
+	if (m_root == nullptr || sub_root == nullptr) {
+		return nullptr;
+	}
+
+	if (m_root->value == sub_root->value) {
+		searchSubTree(m_root->left, sub_root->left);
+		searchSubTree(m_root->right, sub_root->right);
+	}
+	searchSubTree(searchKeyWithoutList(m_root, sub_root->value), sub_root);
+} */
