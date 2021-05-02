@@ -98,15 +98,13 @@ void Tree::printTree(pnode root) {
 
 		 int balance = right - left;
 		 std::string avlViolation = "";
-		 if (balance == 2) {
+		 if (balance <= -2 || balance >= 2) {
 			avlViolation = " (AVL violation!)";
 			isAvl = false;
 		 }
-		 std::cout << "bal(" << root->value << ") = " << balance << avlViolation << std::endl;
+		 std::cout << " -> bal(" << root->value << ") = " << balance << avlViolation << std::endl;
 		 return 1 + std::max(left, right);
 	 }
-
-	 
 }
 
 pnode Tree::searchKey(pnode root, std::vector<int> &searchList, int key)
@@ -138,7 +136,7 @@ pnode Tree::searchKeyWithoutList(pnode root, int key)
 	if (root == nullptr) {
 		return nullptr;
 	}
-	if (root->value > key) {
+	else if (root->value > key) {
 		searchKeyWithoutList(root->left, key);
 	}
 	else if (root->value < key) {
@@ -152,16 +150,32 @@ pnode Tree::searchKeyWithoutList(pnode root, int key)
 	}
 }
 
-/*
-pnode Tree::searchSubTree(pnode m_root, pnode sub_root) {
-
-	if (m_root == nullptr || sub_root == nullptr) {
-		return nullptr;
+int Tree::searchSubTree(pnode m_root, pnode sub_root, bool &error) {
+	if (error == true) {
+		return -1;
 	}
 
-	if (m_root->value == sub_root->value) {
-		searchSubTree(m_root->left, sub_root->left);
-		searchSubTree(m_root->right, sub_root->right);
+	if (sub_root->left == nullptr && sub_root->right == nullptr) {
+		return 1;
 	}
-	searchSubTree(searchKeyWithoutList(m_root, sub_root->value), sub_root);
-} */
+
+	if (sub_root->left != nullptr) {
+		pnode searchedNode = searchKeyWithoutList(m_root->left, sub_root->left->value);
+		if (searchedNode == nullptr) {
+			error = true;
+		}
+		searchSubTree(searchedNode, sub_root->left, error);
+	}
+
+	if (error == true) {
+		return -1;
+	}
+
+	if (sub_root->right != nullptr) {
+		pnode searchedNode = searchKeyWithoutList(m_root->right, sub_root->right->value);
+		if (searchedNode == nullptr) {
+			error = true;
+		}
+		searchSubTree(searchedNode, sub_root->right, error);
+	}
+} 
